@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
 import '../theme/index.css'
+import 'normalize.css'
 import router from './router'
 
 Vue.use(ElementUI)
