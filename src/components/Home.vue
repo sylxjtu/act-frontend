@@ -36,48 +36,61 @@
         :formatter="acceptFormatter">
       </el-table-column>
       <el-table-column v-if = "isLoggedIn"
-        prop="isAccepted"
         label="管理"
-        :formatter="acceptFormatter">
+        width="100">
+        <template scope="scope">
+          <el-button
+          size="small"
+          @click="handleDetail(scope.row.id)">详情</el-button>
+        </template>
       </el-table-column>
     </el-table>
-    <el-checkbox v-model="showAll">显示所有活动（包括已结束的活动）</el-checkbox>
+    <el-checkbox class="showAll" v-model="showAll">显示所有活动（包括已结束的活动）</el-checkbox>
   </div>
 </template>
 
 <script>
   import ActivityController from '../controllers/activity'
-  import LoginController from '../controllers/login'
   import dateFormat from '../helpers/dateformat'
+  import { mapState } from 'vuex'
   export default {
     data () {
       return {
         tableData: [],
         isLoading: true,
-        isLoggedIn: false,
         showAll: false
       }
     },
     created () {
+      var self = this
+      this.$store.dispatch('checkLoginState').catch((err) => { self.$alert(err.msg) })
       this.loadData()
     },
+    computed: mapState({
+      isLoggedIn: 'isLoggedIn'
+    }),
     methods: {
       rowClassName: (row) => (row.isAccepted ? 'row-success' : 'row-pending'),
       acceptFormatter: (row) => (row.isAccepted ? '通过' : '等待'),
       beginTimeFormatter: (row) => (dateFormat(row.beginTime)),
       endTimeFormatter: (row) => (dateFormat(row.endTime)),
+
       loadData () {
         var self = this
         self.isLoading = true
-        Promise.all([ActivityController.getActivities(self.showAll), LoginController.getLoginStatus()])
+        ActivityController.getActivities(self.showAll)
         .then((data) => {
-          self.tableData = data[0]
-          self.isLoggedIn = data[1].isLoggedIn
+          self.tableData = data
           self.isLoading = false
         }).catch((err) => {
           self.$alert(err.msg)
           self.isLoading = false
         })
+      },
+
+      handleDetail (activityId) {
+        // TODO: handleDetail
+        console.log(activityId)
       }
     },
     watch: {
@@ -94,5 +107,11 @@
 }
 .row-pending {
   background-color: #c9e5f5 !important;
+}
+</style>
+
+<style scoped>
+.showAll {
+  margin-top: 20px;
 }
 </style>
