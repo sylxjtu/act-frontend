@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
+    <el-row><el-col :xs="24" :md="{span: 12, offset: 6}">
     <router-view></router-view>
+    </el-col></el-row>
   </div>
 </template>
 
@@ -22,5 +24,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+label {
+  font-weight: bold;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>活动室申请系统</h1>
-    <el-table
+    <el-table border
       v-loading="isLoading"
       :data="tableData"
       :row-class-name="rowClassName"
@@ -22,11 +22,13 @@
       <el-table-column
         prop="beginTime"
         label="开始时间"
+        width="110"
         :formatter="beginTimeFormatter">
       </el-table-column>
       <el-table-column
         prop="endTime"
         label="结束时间"
+        width="110"
         :formatter="endTimeFormatter">
       </el-table-column>
       <el-table-column
@@ -62,8 +64,6 @@
       }
     },
     created () {
-      var self = this
-      this.$store.dispatch('checkLoginState').catch((err) => { self.$alert(err.msg) })
       this.loadData()
     },
     computed: mapState({
@@ -89,8 +89,7 @@
       },
 
       handleDetail (activityId) {
-        // TODO: handleDetail
-        console.log(activityId)
+        this.$router.push({name: 'ActivityDetail', params: {id: activityId}})
       }
     },
     watch: {
