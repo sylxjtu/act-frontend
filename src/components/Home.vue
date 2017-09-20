@@ -9,7 +9,7 @@
       <el-table-column
         prop="id"
         label="#"
-        width="50">
+        width="100">
       </el-table-column>
       <el-table-column
         prop="name"
