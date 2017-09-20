@@ -11,5 +11,18 @@ export default {
         else resolve(res.body.data)
       })
     })
+  },
+  createRoom (data) {
+    return new Promise((resolve, reject) => {
+      request
+        .put(urlJoin(settings.apiUrl, 'room'))
+        .withCredentials()
+        .send({data})
+        .end(function (err, res) {
+          if (err) reject({code: -1, msg: err.toString()})
+          else if (res.body.code) reject(res.body)
+          else resolve()
+        })
+    })
   }
 }

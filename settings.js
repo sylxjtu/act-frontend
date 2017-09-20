@@ -1,5 +1,5 @@
 const settings = {
-  apiUrl: 'http://localhost:3000',
-  salt: 'sylxjtu'
+  apiUrl: 'http://cy.xjtu.edu.cn/roomapi',
+  salt: 'PLU5IS3C0ND'
 }
 module.exports = settings

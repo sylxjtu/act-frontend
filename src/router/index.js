@@ -6,6 +6,7 @@ import Logout from '@/components/Logout'
 import ActivityDetail from '@/components/ActivityDetail'
 import Application from '@/components/Application'
 import MetadataEdit from '@/components/MetadataEdit'
+import Room from '@/components/Room'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/metadata',
       name: 'MetadataEdit',
       component: MetadataEdit
+    },
+    {
+      path: '/room',
+      name: 'Room',
+      component: Room
     }
   ]
 })
