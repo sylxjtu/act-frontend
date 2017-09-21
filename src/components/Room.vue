@@ -8,11 +8,20 @@
       <el-table-column
         prop="id"
         label="#"
-        width="50">
+        width="100">
       </el-table-column>
       <el-table-column
         prop="name"
         label="房间名">
+      </el-table-column>
+      <el-table-column
+        label="管理"
+        width="100">
+        <template scope="scope">
+          <el-button
+          size="small"
+          @click="handleDelete(scope.row.id)">删除</el-button>
+        </template>
       </el-table-column>
     </el-table>
     <el-form :model="createRoomData" class="createRoom" inline>
@@ -60,6 +69,16 @@
           self.loadData()
         }).catch((err) => {
           self.$alert(`创建失败 ${err.msg}`)
+        })
+      },
+      handleDelete (id) {
+        var self = this
+        RoomController.deleteRoom(id)
+        .then(() => {
+          self.$alert('删除成功')
+          self.loadData()
+        }).catch((err) => {
+          self.$alert(`删除失败 ${err.msg}`)
         })
       }
     }

@@ -24,5 +24,17 @@ export default {
           else resolve()
         })
     })
+  },
+  deleteRoom (id) {
+    return new Promise((resolve, reject) => {
+      request
+        .delete(urlJoin(settings.apiUrl, 'room', id))
+        .withCredentials()
+        .end(function (err, res) {
+          if (err) reject({code: -1, msg: err.toString()})
+          else if (res.body.code) reject(res.body)
+          else resolve()
+        })
+    })
   }
 }
