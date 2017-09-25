@@ -46,7 +46,6 @@
   import ActivityController from '../controllers/activity'
   import RoomController from '../controllers/room'
   import Captcha from './Captcha'
-  import dateFormat from '../helpers/dateformat'
   export default {
     data () {
       return {
@@ -127,8 +126,8 @@
           self.application,
           {
             captcha: undefined,
-            beginTime: dateFormat(self.application.timeRange[0]),
-            endTime: dateFormat(self.application.timeRange[1])
+            beginTime: self.application.timeRange[0],
+            endTime: self.application.timeRange[1]
           }
         )
         console.log(self.application)
